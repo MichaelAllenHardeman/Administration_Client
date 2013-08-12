@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- //                                                                                                           // -->
+<!-- // file:        admin_client.wxs                                                                             // -->
+<!-- // author:      mhardeman25@gmail.com                                                                        // -->
+<!-- // languge:     xml wix msi script                                                                           // -->
+<!-- // description: creates a .msi file for the client.                                                          // -->
+<!-- //                                                                                                           // -->
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- The essence of XML is this: the problem it solves is not hard,                                                  -->
+<!-- and it does not solve the problem well. ~Phil Wadler                                                            -->
+  
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <!-- General Installer Information -->
+  <Product Id="d545b508-f821-4e68-be43-b987d4c6ce4e"
+    Name="Administration Client"
+    Language="1033"
+    Version="1.0.0.0"
+    UpgradeCode="c3cfd5ab-9812-48bf-85ec-78c45e4db566"
+    Manufacturer="Michael Hardeman">
+    <Package Id="*"
+      Description="Administration Client Installer"
+      Comments= "Installs the Administration Client which listens for commands from 127.0.0.1"
+      InstallerVersion="350"
+      Compressed="yes"/>
+    <Media Id="1"
+      Cabinet="Product.cab"
+      EmbedCab="yes"
+      CompressionLevel="high"/>
+
+    <!-- File System Changes -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+
+      <!-- Main Program Installation -->
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="AdminProgramFiles" Name="AdminClient">
+          <Directory Id="INSTALLDIR" Name="Test Client">
+
+            <!-- Binary Files -->
+            <Directory Id="BINDIR" Name="bin">              
+              <Component Id="binaries" Guid="52517e67-d833-44ef-8337-56fe864ca3ad">
+                <!-- Folder permissions and properties -->
+                <CreateFolder>
+                  <Permission
+                    GenericAll="yes"
+                    User="Authenticated Users"/>
+                </CreateFolder>
+                <RemoveFile
+                  Id="RemoveFileLogsAll"
+                  Name="*.*"
+                  On="uninstall"/>
+                <!-- Main EXE file -->                
+                <File Id="putty" Name="putty.exe" DiskId="1" Vital="yes"     
+                  Source="..\..\bin\putty.exe"/>
+                <File Id="ping" Name="ping.bat" DiskId="1" Vital="yes"
+                  Source="..\..\bin\ping.bat"/>
+                <File Id="admin_client" Name="admin_client.exe" DiskId="1" Vital="yes" KeyPath="yes"
+                  Source="..\..\bin\admin_client.exe"/>
+              </Component>
+            </Directory>
+
+            <!-- Source Files -->
+            <Directory Id="SRCDIR" Name="src">
+              <Directory Id="INSTALLER" Name="installer">
+                <Component Id="installer" Guid="2cd202d8-ce72-479c-95fc-e008ebdc1800">
+                  <File Id="Admin_Client_Wix" Name="admin_client.wxs" DiskId="1" Vital="no"     
+                    Source="admin_client.wxs"/>
+                </Component>
+              </Directory>
+              <Component Id="source" Guid="1d3d3ede-6ea5-4b21-bd7b-d75733c6fbbb">
+                <File Id="Compile_How_To" Name="Compile How To.txt" DiskId="1" Vital="no"     
+                  Source="..\Compile How To.txt"/>
+                <File Id="Administration_Client_Body" Name="Administration_Client.adb" DiskId="1" Vital="no"     
+                  Source="..\Administration_Client.adb"/>
+                <File Id="Generic_Client_Spec" Name="Generic_Client.ads" DiskId="1" Vital="no"
+                  Source="..\Generic_Client.ads"/>
+                <File Id="Generic_Client_Body" Name="Generic_Client.adb" DiskId="1" Vital="no"
+                  Source="..\Generic_Client.adb"/>
+                <File Id="Interface_Windows_Spec" Name="Interface_Windows.ads" DiskId="1" Vital="no"
+                  Source="..\Interface_Windows.ads"/>
+                <File Id="Interface_Window_Body" Name="Interface_Windows.adb" DiskId="1" Vital="no"
+                  Source="..\Interface_Windows.adb"/>
+                <File Id="Make_File" Name="make.bat" DiskId="1" Vital="no"
+                  Source="..\make.bat"/>
+              </Component>
+            </Directory>
+
+            <!-- Licenses -->
+            <Component Id="text_files" Guid="e19e93b8-3fd1-4c35-8369-9b46a5dd1422">
+              <File Id="Licenses" Name="Licenses.txt" DiskId="1" Vital="no"     
+                Source="..\..\Licenses.txt"/>
+              <File Id="Readme" Name="Readme.md" DiskId="1" Vital="no"     
+                Source="..\..\Readme.md"/>
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <!-- Shortcuts -->
+      <Directory Id="StartupFolder" Name="Startup">
+        <Component Id="shortcut" Guid="01d28042-3d56-43ae-9e06-49128303861a">
+          <Shortcut 
+            Id="StartupShortcut" 
+            Name="Administration Client" 
+            Description="Launches applcations based on commands from localhost port"
+            Target="&quote;[BINDIR]admin_client.exe&quote;"
+            WorkingDirectory="BINDIR"/>
+          <RegistryValue
+            Root="HKCU"
+            Key="Software\Microsoft\Admin_Client"
+            Name="installed"
+            Type="integer"
+            Value="1"
+            KeyPath="yes"/>
+        </Component>
+      </Directory>
+    </Directory>
+
+    <!-- Run Program -->
+    <CustomAction Id="Execute"
+      FileKey="admin_client"
+      ExeCommand="&quote;[BINDIR]admin_client.exe&quote;"
+      Impersonate="yes"
+      Return="asyncNoWait"/>
+
+    <InstallExecuteSequence>
+      <Custom Action="Execute" After="InstallFinalize">Not Installed</Custom>
+    </InstallExecuteSequence>
+
+    <!-- Features -->
+    <Feature Id="Adminbinaries" Title="Administration Client" Level="1">
+      <ComponentRef Id="binaries"/>
+      <ComponentRef Id="installer"/>
+      <ComponentRef Id="source"/>
+      <ComponentRef Id="text_files"/>
+      <ComponentRef Id="shortcut"/>
+    </Feature>
+
+    <!-- Include a user interface - to be modified later -->
+    <Property Id="WIXUI_INSTALLDIR">INSTALLDIR</Property>
+    <UIRef Id="WixUI_InstallDir"/>
+    <UIRef Id="WixUI_ErrorProgressText"/>
+  </Product>
+</Wix>
+  

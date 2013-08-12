@@ -1,0 +1,35 @@
+What you need to compile:
+  Gnat compiler    - for the program
+  wix msi compiler - for the installer
+
+Gnat: pick one
+  Mingw*  : http://www.mingw.org/
+  Cygwin  : http://www.cygwin.com/
+  Adacore : http://www.adacore.com/
+
+* recommended
+
+Wix : http://wix.sourceforge.net/
+
+1) make sure gnatmake.exe, candle.exe, and light.exe are in your PATH enviroment variable.
+2) make sure the directory structure is:
+  /Some root folder
+    /bin
+      /putty.exe
+      /ping.bat
+    /src
+      /installer
+        /Admin_Client.wxs
+      /How To Compile.txt
+      /Administration_Client.adb
+      /Generic_Client.ads
+      /Generic_Client.adb
+      /Interface_Windows.ads
+      /Interface_Windows.adb
+      /make.bat   
+    /Licenses.txt
+    /Readme.txt
+3) run make.bat
+
+All those files are compressed into the installer so they have to be there.
+Any extraneous files will be ignored.
