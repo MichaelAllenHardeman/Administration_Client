@@ -2,18 +2,15 @@
   rem ------------------------------------------------------------------------------------------------------------------
   rem --                                                                                                              --
   rem -- file:        make.bat                                                                                        --
-  rem -- author:      mhardeman25@gmail.com                                                                           --
-  rem -- language:    batch, lube up                                                                                  --
+  rem -- author:      Michael Hardeman                                                                                --
+  rem -- language:    batch >:D                                                                                       --
   rem -- description: Builds the program. Read "How To Compile.txt"                                                   --
   rem --                                                                                                              --
   rem ------------------------------------------------------------------------------------------------------------------
-  rem -- Let's count the great language features!
 
   echo Starting Program...
   cd ..
 
-  rem Feature #1: set Macros =yes please!
-  rem Feature #2: no spacing between identifier and discriminant.
   set begin=(
   set end=)
   set then=(
@@ -56,7 +53,6 @@
   set INSTALLER_LINKER_OUTPUT=-o "%INSTALLER_LINKER_FILE%"
 
   echo Checking File Structure...
-  rem Feature #3: No complex conditionals
   if not exist "%BINARY_DIRECTORY%" %then%
     echo %ERROR_HEADER%
     echo Binary Directory did not exist. Dependancies Putty.exe, Ping.bat, srvany.exe, and instsrv.exe missing.
@@ -112,7 +108,6 @@
   %endif%
 
   echo Starting Compilation...
-  rem Feature #4: Hard to read. Say hello job security :D
   if exist "%PROGRAM_MAIN%" %then%
     echo Compiling Source...
     start /wait %PROGRAM_COMPILER% %PROGRAM_OPTIONS% %PROGRAM_INPUT% %PROGRAM_OUTPUT%
@@ -152,7 +147,6 @@
     goto Exit
   %endif%
 
-  rem Feature #5: Branching logic actually forces GOTO's
   :Exit
     cd src
     echo Exiting Program...
