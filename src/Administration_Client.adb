@@ -2,12 +2,11 @@
 ------------------------------------------------------------------------------------------------------------------------
 --                                                                                                                    --
 --  file:        Administration_Client.adb                                                                            --
---  author:      mhardeman25@gmail.com                                                                                --
---  language:    Ada, put on your big boy pants please.                                                               --
+--  author:      Michael Hardeman                                                                                     --
+--  language:    Ada                                                                                                  --
 --  description: Main Procedure of the client program, and Implementation of the Generic Client                       --
 --                                                                                                                    --
 ------------------------------------------------------------------------------------------------------------------------
--- Inside every well-written large program is a well-written small program. ~Charles Antony Richard Hoare
 
 with
   Ada.Streams,
