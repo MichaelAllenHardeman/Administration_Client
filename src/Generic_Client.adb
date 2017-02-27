@@ -2,13 +2,11 @@
 ------------------------------------------------------------------------------------------------------------------------
 --                                                                                                                    --
 --  file:        Generic_Client.adb                                                                                   --
---  author:      mhardeman25@gmail.com                                                                                --
---  language:    Ada, put on your big boy pants please.                                                               --
+--  author:      Michael Hardeman                                                                                     --
+--  language:    Ada                                                                                                  --
 --  description: Procedural/Functional implementation of package specification for generic client                     --
 --                                                                                                                    --
 ------------------------------------------------------------------------------------------------------------------------
--- A most important, but also most elusive, aspect of any tool is 
--- its influence on the habits of those who train themselves in its use. ~E. W. Dijkstra
 
 package body Generic_Client
   is
