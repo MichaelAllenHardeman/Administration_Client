@@ -2,13 +2,11 @@
 <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <!-- //                                                                                                           // -->
 <!-- // file:        admin_client.wxs                                                                             // -->
-<!-- // author:      mhardeman25@gmail.com                                                                        // -->
+<!-- // author:      Michael Hardeman                                                                             // -->
 <!-- // languge:     xml wix msi script                                                                           // -->
 <!-- // description: creates a .msi file for the client.                                                          // -->
 <!-- //                                                                                                           // -->
 <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-<!-- The essence of XML is this: the problem it solves is not hard,                                                  -->
-<!-- and it does not solve the problem well. ~Phil Wadler                                                            -->
   
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
