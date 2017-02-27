@@ -2,13 +2,11 @@
 ------------------------------------------------------------------------------------------------------------------------
 --                                                                                                                    --
 --  file:        Generic_Client.ads                                                                                   --
---  author:      mhardeman25@gmail.com                                                                                --
---  language:    Ada, put on your big boy pants please.                                                               --
+--  author:      Michael Hardeman                                                                                     --
+--  language:    Ada                                                                                                  --
 --  description: Package specifications and functional/procedural prototypes for a generic client                     --
 --                                                                                                                    --
 ------------------------------------------------------------------------------------------------------------------------
--- Programs must be written for people to read, and only incidentally for machines to execute. 
--- ~Harold Abelson and Gerald Jay Sussman
 
 with
   Gnat.Sockets,
