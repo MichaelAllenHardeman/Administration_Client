@@ -1,7 +1,7 @@
 Administration Client
 ========
 
-The aim of Administration Client is to .
+This was something I wrote in college. It was part of a very badly written php page that was essentially a simple DBMs. This helped to add some interactivity to the webpage.
 
 Planned features
 ----------------
